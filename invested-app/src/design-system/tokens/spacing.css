@@ -1,0 +1,21 @@
+:root {
+  /* Unidad base: 8px */
+  --space-1: 4px; /* 0.5 × base */
+  --space-2: 8px; /* 1 × base */
+  --space-3: 12px; /* 1.5 × base */
+  --space-4: 16px; /* 2 × base */
+  --space-5: 20px; /* 2.5 × base */
+  --space-6: 24px; /* 3 × base */
+  --space-8: 32px; /* 4 × base */
+  --space-10: 40px; /* 5 × base */
+  --space-12: 48px; /* 6 × base */
+  --space-16: 64px; /* 8 × base */
+
+  /* Touch targets mobile (mínimo 44px per WCAG) */
+  --touch-target-min: 44px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}

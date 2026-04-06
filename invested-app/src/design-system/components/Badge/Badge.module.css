@@ -1,0 +1,52 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+/* Variantes de estado */
+.success {
+  background: var(--color-green-l04);
+  color: var(--color-green-d03);
+}
+
+.neutral {
+  background: #f3f4f6;
+  color: var(--color-grey-l02);
+}
+
+.info {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Variante de logro (gamificación) */
+.achievement {
+  background: linear-gradient(135deg, var(--color-green-l04) 0%, var(--color-teal-l04) 100%);
+  color: var(--color-green-d03);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}

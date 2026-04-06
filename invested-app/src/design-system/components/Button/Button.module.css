@@ -1,0 +1,121 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* ─── Tamaños ─── */
+.small {
+  height: 30px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.large {
+  height: 48px;
+  padding: 0 var(--space-5);
+  font-size: var(--font-size-md);
+  min-width: 140px;
+}
+
+/* icon-only override */
+.iconOnly.small {
+  width: 30px;
+  padding: 0;
+  min-width: unset;
+}
+
+.iconOnly.large {
+  width: 48px;
+  padding: 0;
+  min-width: unset;
+}
+
+/* ─── Primary ─── */
+.primary {
+  background: var(--color-green-n00);
+  color: #ffffff;
+  border-color: var(--color-green-n00);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-green-d01);
+  border-color: var(--color-green-d01);
+}
+
+.primary:active:not(:disabled) {
+  background: var(--color-green-d02);
+  border-color: var(--color-green-d02);
+  transform: scale(0.98);
+}
+
+.primary:focus-visible {
+  outline: 2px solid var(--color-green-l02);
+  outline-offset: 2px;
+}
+
+/* ─── Secondary ─── */
+.secondary {
+  background: transparent;
+  color: var(--color-green-n00);
+  border-color: var(--color-green-n00);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-green-l05);
+}
+
+.secondary:active:not(:disabled) {
+  background: var(--color-green-l04);
+  transform: scale(0.98);
+}
+
+.secondary:focus-visible {
+  outline: 2px solid var(--color-green-l02);
+  outline-offset: 2px;
+}
+
+/* ─── Tertiary ─── */
+.tertiary {
+  background: transparent;
+  color: var(--color-grey-n00);
+  border-color: transparent;
+}
+
+.tertiary:hover:not(:disabled) {
+  background: var(--color-green-l05);
+}
+
+.tertiary:active:not(:disabled) {
+  background: var(--color-green-l04);
+  transform: scale(0.98);
+}
+
+.tertiary:focus-visible {
+  outline: 2px solid var(--color-green-l02);
+  outline-offset: 2px;
+}
+
+/* ─── Disabled (aplica a todos los types) ─── */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Full width (mobile CTAs) ─── */
+.fullWidth {
+  width: 100%;
+}

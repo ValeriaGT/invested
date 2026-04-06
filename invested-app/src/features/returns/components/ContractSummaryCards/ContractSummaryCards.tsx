@@ -1,0 +1,101 @@
+import { Button } from '@ds/components/Button'
+import { formatCOP } from '@shared/utils/format'
+import type { ContractData } from '../../types'
+import { IconArrowTrendDown, IconTriangleExclamation } from '../Icons'
+import styles from './ContractSummaryCards.module.css'
+
+interface ContractSummaryCardsProps {
+  data: ContractData
+  onContribute?: () => void
+  onWithdraw?: () => void
+  onContingentDetail?: () => void
+}
+
+export function ContractSummaryCards({
+  data,
+  onContribute,
+  onWithdraw,
+  onContingentDetail,
+}: ContractSummaryCardsProps) {
+  return (
+    <div className={styles.row}>
+      <ContractTotalCard data={data} onContribute={onContribute} onWithdraw={onWithdraw} />
+      <EvolutionCard data={data} />
+      <ContingentAccountCard onDetail={onContingentDetail} />
+    </div>
+  )
+}
+
+function ContractTotalCard({
+  data,
+  onContribute,
+  onWithdraw,
+}: {
+  data: ContractData
+  onContribute?: () => void
+  onWithdraw?: () => void
+}) {
+  return (
+    <div className={styles.totalCard}>
+      <div className={styles.totalCardDecorTop} aria-hidden="true" />
+      <div className={styles.totalCardDecorBottom} aria-hidden="true" />
+      <div className={styles.totalCardContent}>
+        <p className={styles.totalLabel}>Dinero total en tu contrato</p>
+        <p className={`${styles.totalAmount} monetary`}>{formatCOP(data.totalAmount)}</p>
+        <p className={styles.contractNumber}>Contrato # {data.contractNumber}</p>
+        <div className={styles.ctaButtons}>
+          <Button variant="Primary" size="Small" label="Aportar" onClick={onContribute} />
+          <Button variant="Secondary" size="Small" label="Retirar" onClick={onWithdraw} />
+        </div>
+        <p className={styles.adminNote}>Administrado por Skandia AFP - ACCAI S.A.</p>
+      </div>
+    </div>
+  )
+}
+
+function EvolutionCard({ data }: { data: ContractData }) {
+  const isNegativeReturn = data.returns < 0
+
+  return (
+    <div className={styles.evolutionCard}>
+      {data.hasActionNeeded && <span className={styles.actionBadge}>Acción necesaria</span>}
+      <p className={styles.evolutionTitle}>Evolución del contrato al {data.evolutionDate}</p>
+      <div className={styles.metricGroup}>
+        <p className={styles.metricLabel}>Dinero que has aportado</p>
+        <p className={`${styles.metricValue} monetary`}>{formatCOP(data.contributions)}</p>
+      </div>
+      <div className={styles.metricGroup}>
+        <p className={styles.metricLabel}>Rendimientos</p>
+        <div className={styles.returnsRow}>
+          {isNegativeReturn && <IconTriangleExclamation size={16} />}
+          <p
+            className={`${styles.metricValue} ${isNegativeReturn ? styles.negative : ''} monetary`}
+          >
+            {formatCOP(data.returns)}
+          </p>
+          {isNegativeReturn && <IconArrowTrendDown size={16} />}
+        </div>
+        {isNegativeReturn && (
+          <a href="#" className={styles.actionLink}>
+            ¿Qué puedo hacer?
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function ContingentAccountCard({ onDetail }: { onDetail?: () => void }) {
+  return (
+    <div className={styles.contingentCard}>
+      <div className={styles.contingentGraphic} aria-hidden="true">
+        <div className={styles.contingentCircle} />
+      </div>
+      <p className={styles.contingentTitle}>Cuenta contingente de tus aportes</p>
+      <p className={styles.contingentDesc}>
+        Destinado a garantizar el cumplimiento de tus obligaciones tributarias.
+      </p>
+      <Button variant="Secondary" size="Small" label="Ver detalle" onClick={onDetail} />
+    </div>
+  )
+}

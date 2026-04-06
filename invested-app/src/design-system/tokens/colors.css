@@ -1,0 +1,96 @@
+:root {
+  /* ─── Primary Green — Paleta principal de marca ─── */
+  --color-green-d04: #006e22;
+  --color-green-d03: #007c26;
+  --color-green-d02: #009a2f;
+  --color-green-d01: #03a835;
+  --color-green-n00: #00c73d; /* Verde base / Brand */
+  --color-green-l01: #1dd64c;
+  --color-green-l02: #47e264;
+  --color-green-l03: #5fed73;
+  --color-green-l04: #caf9cb;
+  --color-green-l05: #f6fcf2; /* Verde más claro / fondos */
+
+  /* ─── Primary Grey — Escala de grises ─── */
+  --color-grey-d05: #000000; /* Negro puro */
+  --color-grey-d04: #232323;
+  --color-grey-d03: #2c2c2c;
+  --color-grey-d02: #323232;
+  --color-grey-d01: #363636;
+  --color-grey-n00: #404040; /* Gris base */
+  --color-grey-l01: #444444;
+  --color-grey-l02: #565656;
+  --color-grey-l03: #666666; /* Texto secundario */
+  --color-grey-l04: #878787;
+  --color-grey-l05: #a5a5a5; /* Placeholders */
+
+  /* ─── Secondary Green Complementary ─── */
+  --color-sec-green-d04: #487000;
+  --color-sec-green-d03: #629a00;
+  --color-sec-green-d02: #6ba800;
+  --color-sec-green-d01: #7dc400;
+  --color-sec-green-n00: #8fe000;
+  --color-sec-green-l01: #a5e633;
+  --color-sec-green-l02: #bbec65;
+  --color-sec-green-l03: #d2f298;
+  --color-sec-green-l04: #ddf6b1;
+  --color-sec-green-l05: #f3fce3;
+
+  /* ─── Secondary Blue/Teal Complementary ─── */
+  --color-teal-d04: #29806d;
+  --color-teal-d03: #39b398;
+  --color-teal-d02: #42ccae;
+  --color-teal-d01: #4ae6c3;
+  --color-teal-n00: #52ffd9;
+  --color-teal-l01: #76fee0;
+  --color-teal-l02: #99fde7;
+  --color-teal-l03: #bbfdee;
+  --color-teal-l04: #ccfdf2;
+  --color-teal-l05: #edfefa;
+
+  /* ─── Semantic / Alias tokens ─── */
+  --color-brand: var(--color-green-n00);
+  --color-brand-hover: var(--color-green-d01);
+  --color-brand-pressed: var(--color-green-d02);
+  --color-brand-subtle: var(--color-green-l05);
+
+  --color-text-primary: var(--color-grey-n00);
+  --color-text-secondary: var(--color-grey-l03);
+  --color-text-placeholder: var(--color-grey-l05);
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: var(--color-grey-l04);
+
+  --color-border: var(--color-grey-l04);
+  --color-border-focus: var(--color-green-l02);
+  --color-surface: #ffffff;
+  --color-surface-subtle: var(--color-green-l05);
+
+  /* ─── Skandia DS semantic tokens ─── */
+  --color-primary-green-00: var(--color-green-n00); /* DS alias */
+  --color-text-body-heading-1: var(--color-grey-n00); /* #404040 */
+  --color-text-body-heading-2: var(--color-grey-l03); /* #666666 */
+  --color-text-link: #0099de;
+  --color-neutral-00: #ffffff;
+  --color-neutral-l01: #fafafa;
+  --color-neutral-l02: #f6f6f6;
+  --color-neutral-l03: #e9e9e9;
+  --color-neutral-l04: #dddddd;
+  --color-bg-main: #ffffff;
+  --color-bg-grey-light: #f7f7f7;
+  --color-bg-brand-light: var(--color-green-l05); /* #f6fcf2 */
+  --color-stroke-brand: var(--color-green-n00);
+  --color-stroke-grey-light: #dddddd;
+  --color-stroke-grey-medium: #c5c5c5;
+  --color-button-primary-default: var(--color-green-n00);
+  --color-button-primary-hover: var(--color-green-d01);
+  --color-button-secondary-hover: var(--color-green-l04);
+  --color-button-disabled: var(--color-green-l03); /* #e9e9e9 approx */
+  --color-feedback-success-light: #ecfdf3;
+  --color-feedback-success-dark: #87f491;
+  --color-feedback-warning-light: #fff3e0;
+  --color-feedback-warning-dark: #ffae08;
+  --color-feedback-info-light: #ebf4ff;
+  --color-feedback-info-dark: #0099de;
+  --color-feedback-error-light: #fff5f4;
+  --color-feedback-error-dark: #e03430;
+}

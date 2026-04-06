@@ -1,0 +1,220 @@
+.container {
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 0 4px 0 rgba(61, 75, 92, 0.15);
+  padding: 24px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ─── Header row ─── */
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-left: var(--space-2);
+}
+
+.samiIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sparkle {
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 4px;
+}
+
+.headline {
+  flex: 1;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 26px;
+}
+
+.userName {
+  color: var(--color-text-link);
+}
+
+.headlineText {
+  color: var(--color-text-primary);
+}
+
+.editGoalBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-brand);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  height: 42px;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.editGoalBtn:hover {
+  background: var(--color-brand-hover);
+}
+
+.editGoalBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Goal progress card ─── */
+.goalCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  background: var(--color-neutral-l01);
+  border-radius: 16px;
+  padding: 20px 24px 24px;
+}
+
+/* Left column */
+.goalDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.goalTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.goalName {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 26px;
+}
+
+.goalEditBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.goalEditBtn:hover {
+  background: var(--color-green-l05);
+}
+
+/* Progress bar */
+.progressGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.progressBar {
+  display: flex;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  height: 16px;
+}
+
+.progressFill {
+  height: 16px;
+  border-radius: 8px 0 0 8px;
+  background: linear-gradient(90deg, var(--color-brand) 0%, var(--color-green-l01) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 48px;
+  transition: width 0.4s ease;
+}
+
+.progressLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.progressEmpty {
+  flex: 1;
+  height: 16px;
+  background: var(--color-neutral-l03);
+  opacity: 0.8;
+  border-radius: 0 8px 8px 0;
+}
+
+.progressMeta {
+  display: flex;
+  gap: var(--space-4);
+  padding: 0 var(--space-2);
+  justify-content: space-between;
+}
+
+.metaItem {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  line-height: 20px;
+}
+
+.metaRight {
+  text-align: right;
+}
+
+/* Right column */
+.targetAmount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.targetLabel {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 22px;
+  text-align: center;
+}
+
+.targetBox {
+  background: #fff;
+  border: 1px solid var(--color-neutral-l03);
+  border-radius: 8px;
+  padding: var(--space-2) var(--space-4);
+}
+
+.targetValue {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand);
+  line-height: 24px;
+  white-space: nowrap;
+}

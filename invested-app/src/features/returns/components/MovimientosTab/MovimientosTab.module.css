@@ -1,0 +1,242 @@
+.container {
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 0 4px 0 rgba(61, 75, 92, 0.15);
+  padding: 16px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ─── Filter button ─── */
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: var(--space-2);
+  box-shadow: 0 0 4px 0 rgba(61, 75, 92, 0.15);
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 22px;
+  transition: box-shadow 0.15s;
+}
+
+.filterBtn:hover {
+  box-shadow: 0 0 8px 0 rgba(61, 75, 92, 0.2);
+}
+
+/* ─── Movement list ─── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ─── Movement card ─── */
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 4px 0 rgba(68, 68, 68, 0.15);
+  padding-right: 12px;
+}
+
+.cardLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+  min-width: 0;
+}
+
+.chip {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-family-body);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  padding: 4px 16px;
+  border-radius: 16px 0 8px 0;
+  white-space: nowrap;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-left: 16px;
+}
+
+.metaSeparator {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--color-neutral-l03);
+  flex-shrink: 0;
+}
+
+.metaDivider {
+  display: block;
+  width: 12px;
+  height: 1px;
+  background: var(--color-neutral-l03);
+  flex-shrink: 0;
+}
+
+.metaItem {
+  display: flex;
+  gap: var(--space-1);
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.metaLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  line-height: 22px;
+}
+
+.metaValue {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: 22px;
+}
+
+/* ─── Card right ─── */
+.cardRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.netLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 20px;
+  text-align: center;
+}
+
+.netBadge {
+  background: var(--color-bg-grey-light);
+  border-radius: 8px;
+  padding: var(--space-2) var(--space-4);
+}
+
+.netValue {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.chevronBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.chevronBtn:hover {
+  background: var(--color-surface-subtle);
+}
+
+/* ─── Pagination ─── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+}
+
+.pageArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  transition: background-color 0.15s;
+}
+
+.pageArrow:hover:not(:disabled) {
+  background: var(--color-surface-subtle);
+}
+
+.pageArrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.pageNum {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-grey-l01);
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  line-height: 22px;
+  min-width: 20px;
+  text-align: center;
+  transition: color 0.15s;
+}
+
+.pageNum:disabled {
+  cursor: default;
+}
+
+.pageNum:hover:not(:disabled):not(.pageNumActive) {
+  color: var(--color-text-primary);
+}
+
+.pageNumActive {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-bold);
+  opacity: 1;
+  cursor: default;
+}

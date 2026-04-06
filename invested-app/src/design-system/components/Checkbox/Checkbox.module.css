@@ -1,0 +1,74 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Ocultar el input nativo visualmente pero mantenerlo accesible */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  flex-shrink: 0;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+  margin-top: 2px; /* Alinear con primera línea de texto */
+}
+
+.input:checked + .box {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.input:focus-visible + .box {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.checkmark {
+  color: white;
+  font-size: 12px;
+  line-height: 1;
+  display: none;
+}
+
+.input:checked ~ * .checkmark,
+.input:checked + .box .checkmark {
+  display: block;
+}
+
+.label {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
