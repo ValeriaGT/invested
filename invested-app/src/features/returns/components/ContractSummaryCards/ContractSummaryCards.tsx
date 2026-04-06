@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import { Button } from '@ds/components/Button'
+import { Badge } from '@ds/components/Badge'
+import { MixDrawer } from '@/components/crecer/MixDrawer'
 import { formatCOP } from '@shared/utils/format'
 import type { ContractData } from '../../types'
 import { IconArrowTrendDown, IconTriangleExclamation } from '../Icons'
@@ -9,6 +12,7 @@ interface ContractSummaryCardsProps {
   onContribute?: () => void
   onWithdraw?: () => void
   onContingentDetail?: () => void
+  onViewComposition?: () => void
 }
 
 export function ContractSummaryCards({
@@ -16,11 +20,12 @@ export function ContractSummaryCards({
   onContribute,
   onWithdraw,
   onContingentDetail,
+  onViewComposition,
 }: ContractSummaryCardsProps) {
   return (
     <div className={styles.row}>
       <ContractTotalCard data={data} onContribute={onContribute} onWithdraw={onWithdraw} />
-      <EvolutionCard data={data} />
+      <EvolutionCard data={data} onViewComposition={onViewComposition} />
       <ContingentAccountCard onDetail={onContingentDetail} />
     </div>
   )
@@ -53,7 +58,14 @@ function ContractTotalCard({
   )
 }
 
-function EvolutionCard({ data }: { data: ContractData }) {
+function EvolutionCard({
+  data,
+  onViewComposition,
+}: {
+  data: ContractData
+  onViewComposition?: () => void
+}) {
+  const [mixDrawerOpen, setMixDrawerOpen] = useState(false)
   const isNegativeReturn = data.returns < 0
 
   return (
@@ -81,6 +93,33 @@ function EvolutionCard({ data }: { data: ContractData }) {
           </a>
         )}
       </div>
+
+      {/* ── Sección mezcla ── */}
+      <hr className={styles.mixDivider} aria-hidden="true" />
+
+      <div className={styles.mixRow}>
+        <span className={styles.mixLabel}>Tu mezcla actual:</span>
+        <Badge label="Discreta 📊" variant="success" />
+      </div>
+
+      <p className={styles.mixNote}>Gestionada automáticamente por Invested</p>
+
+      <button
+        className={styles.mixLink}
+        type="button"
+        onClick={() => setMixDrawerOpen(true)}
+      >
+        ¿Qué significa tu mezcla? →
+      </button>
+
+      <MixDrawer
+        isOpen={mixDrawerOpen}
+        onClose={() => setMixDrawerOpen(false)}
+        onViewComposition={() => {
+          setMixDrawerOpen(false)
+          onViewComposition?.()
+        }}
+      />
     </div>
   )
 }

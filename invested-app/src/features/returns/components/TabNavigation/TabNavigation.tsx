@@ -1,5 +1,5 @@
 import type { ContractTab } from '../../types'
-import { IconChartMixed, IconFolderGrid, IconRefresh, IconRocket } from '../Icons'
+import { IconChartMixed, IconFolderGrid, IconRefresh, IconRocket, IconSeedling } from '../Icons'
 import styles from './TabNavigation.module.css'
 
 interface Tab {
@@ -11,6 +11,7 @@ interface Tab {
 const TABS: Tab[] = [
   { id: 'desempeno', label: 'Desempeño', icon: <IconChartMixed size={24} /> },
   { id: 'objetivo', label: 'Objetivo', icon: <IconRocket size={24} /> },
+  { id: 'crecer', label: 'Mi InvestED', icon: <IconSeedling size={24} /> },
   { id: 'movimientos', label: 'Movimientos', icon: <IconRefresh size={24} /> },
   { id: 'detalles', label: 'Detalles', icon: <IconFolderGrid size={24} /> },
 ]

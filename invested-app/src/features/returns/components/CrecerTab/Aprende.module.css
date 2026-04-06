@@ -1,0 +1,191 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-4) 0;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Fila de módulos con scroll horizontal ── */
+.moduleRow {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-l03) transparent;
+}
+
+.moduleRow::-webkit-scrollbar { height: 4px; }
+.moduleRow::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-l03);
+  border-radius: var(--radius-full);
+}
+
+/* ── Card base ── */
+.moduleCard {
+  min-width: 160px;
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  /* reset button styles */
+  font-family: inherit;
+}
+
+/* Disponible */
+.cardAvailable {
+  border-color: rgba(0, 199, 61, 0.3);
+}
+
+.cardAvailable:hover {
+  box-shadow: 0 4px 16px rgba(0, 199, 61, 0.12);
+  transform: translateY(-2px);
+}
+
+.cardAvailable:hover .emojiBox {
+  transform: scale(1.1);
+}
+
+/* Completado */
+.cardCompleted {
+  border-color: transparent;
+  background: var(--color-neutral-l02);
+  cursor: default;
+  opacity: 0.8;
+}
+
+/* Bloqueado */
+.cardLocked {
+  border-color: var(--color-neutral-l03);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Caja del icono/emoji ── */
+.emojiBox {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  background: rgba(0, 199, 61, 0.1);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: transform 150ms ease;
+  flex-shrink: 0;
+}
+
+.emojiBoxLocked {
+  background: var(--color-neutral-l03);
+  filter: grayscale(1);
+}
+
+.emojiBoxCompleted {
+  background: var(--color-neutral-l03);
+  filter: grayscale(0.6);
+}
+
+/* ── Badge superpuesto en esquina ── */
+.overlayBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.cardLocked .overlayBadge {
+  background: var(--color-grey-l04);
+}
+
+.cardCompleted .overlayBadge {
+  background: var(--color-brand);
+}
+
+/* ── Título ── */
+.moduleTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.cardLocked .moduleTitle,
+.cardCompleted .moduleTitle {
+  color: var(--color-text-secondary);
+}
+
+/* ── Badge de estado ── */
+.statusBadge {
+  display: inline-block;
+  padding: 3px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.statusAvailable {
+  background: rgba(0, 199, 61, 0.1);
+  color: var(--color-green-d03);
+}
+
+.statusCompleted {
+  background: var(--color-neutral-l03);
+  color: var(--color-text-secondary);
+}
+
+.statusLocked {
+  background: var(--color-neutral-l03);
+  color: var(--color-text-secondary);
+}
+
+/* ── Mensaje locked ── */
+.lockedMsg {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}

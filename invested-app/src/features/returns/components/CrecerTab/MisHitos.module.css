@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-4) 0;
+}
+
+.header {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* ── Grid dos columnas ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ── Columna ── */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.columnHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.columnTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.columnDescription {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.hitosList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ── Cards de hito — sobreescriben borde/fondo del Card base ── */
+.cardUnlocked {
+  border-color: var(--color-brand) !important;
+  background: var(--color-surface-subtle) !important;
+}
+
+.cardPending {
+  border-color: var(--color-border) !important;
+  background: var(--color-surface) !important;
+  opacity: 0.6;
+}
+
+/* ── Contenido interno del hito ── */
+.hitoRow {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.hitoEmoji {
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.hitoBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hitoTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.hitoDescription {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.hitoDate {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 0;
+}

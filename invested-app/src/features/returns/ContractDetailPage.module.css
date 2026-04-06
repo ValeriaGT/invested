@@ -49,6 +49,26 @@
   background: var(--color-surface-subtle);
 }
 
+.fundNameRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.fundNameSeparator {
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--color-text-secondary, #9ca3af);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.fundLogo {
+  height: 14px;
+  width: auto;
+}
+
 .fundName {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-sm);
@@ -119,6 +139,13 @@
 .tablePanel {
   flex: 1;
   min-width: 0;
+}
+
+/* ─── Crecer content ─── */
+.crecerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 /* ─── Placeholder for unimplemented tabs ─── */

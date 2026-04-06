@@ -11,7 +11,11 @@ import { CompositionView } from './components/ObjetivoTab/CompositionView'
 import { ObjetivoTab } from './components/ObjetivoTab/ObjetivoTab'
 import { MovimientosTab } from './components/MovimientosTab/MovimientosTab'
 import { DetallesTab } from './components/DetallesTab/DetallesTab'
+import { MiNivel } from './components/CrecerTab/MiNivel'
+import { MisHitos } from './components/CrecerTab/MisHitos'
+import { Aprende } from './components/CrecerTab/Aprende'
 import { IconEdit } from './components/Icons'
+import investedLogo from '../../assets/invested.svg'
 import styles from './ContractDetailPage.module.css'
 
 const BREADCRUMB_ITEMS = [
@@ -23,6 +27,7 @@ const BREADCRUMB_ITEMS = [
 export function ContractDetailPage() {
   const [activeTab, setActiveTab] = useState<ContractTab>('desempeno')
   const [activeSubTab, setActiveSubTab] = useState<ReturnsSubTab>('rendimientos')
+  const [activeCrecerSubTab, setActiveCrecerSubTab] = useState<'miNivel' | 'misHitos' | 'aprende'>('miNivel')
 
   return (
     <div className={styles.page}>
@@ -36,7 +41,11 @@ export function ContractDetailPage() {
               <IconEdit size={16} />
             </button>
           </div>
-          <p className={styles.fundName}>{contractData.fundName}</p>
+          <div className={styles.fundNameRow}>
+            <p className={styles.fundName}>{contractData.fundName}</p>
+            <span className={styles.fundNameSeparator} aria-hidden="true" />
+            <img src={investedLogo} alt="InvestED" className={styles.fundLogo} />
+          </div>
         </div>
       </div>
 
@@ -91,9 +100,53 @@ export function ContractDetailPage() {
         </div>
       )}
 
-      {activeTab === 'objetivo' && <ObjetivoTab />}
+      {activeTab === 'objetivo' && (
+        <ObjetivoTab
+          onNavigateToCrecer={() => {
+            setActiveTab('crecer')
+            setActiveCrecerSubTab('miNivel')
+          }}
+        />
+      )}
 
-      {activeTab === 'movimientos' && <MovimientosTab />}
+      {activeTab === 'crecer' && (
+        <div className={styles.crecerContent}>
+          <div className={styles.subTabsRow}>
+            <div className={styles.subTabs} role="tablist" aria-label="Sección Mi InvestED">
+              {(
+                [
+                  { id: 'miNivel', label: 'Mi Nivel' },
+                  { id: 'misHitos', label: 'Mis Hitos' },
+                  { id: 'aprende', label: 'Aprende' },
+                ] as const
+              ).map((t) => (
+                <button
+                  key={t.id}
+                  role="tab"
+                  aria-selected={activeCrecerSubTab === t.id}
+                  className={`${styles.subTab} ${activeCrecerSubTab === t.id ? styles.subTabActive : ''}`}
+                  onClick={() => setActiveCrecerSubTab(t.id)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {activeCrecerSubTab === 'miNivel' && <MiNivel />}
+          {activeCrecerSubTab === 'misHitos' && <MisHitos />}
+          {activeCrecerSubTab === 'aprende' && <Aprende />}
+        </div>
+      )}
+
+      {activeTab === 'movimientos' && (
+        <MovimientosTab
+          onNavigateToMiInvested={() => {
+            setActiveTab('crecer')
+            setActiveCrecerSubTab('aprende')
+          }}
+        />
+      )}
 
       {activeTab === 'detalles' && <DetallesTab />}
     </div>

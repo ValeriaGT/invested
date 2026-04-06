@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { movements, MOVEMENT_CHIP_STYLES, type Movement } from './movimientosMockData'
+import { MovimientoDetalleDrawer } from './MovimientoDetalleDrawer'
 import { IconFilter, IconChevronRight, IconChevronLeft } from '../Icons'
 import styles from './MovimientosTab.module.css'
 
@@ -11,7 +12,7 @@ function formatValue(value: number): string {
   return value < 0 ? `$ -${formatted}` : `$ ${formatted}`
 }
 
-function MovementCard({ movement }: { movement: Movement }) {
+function MovementCard({ movement, onSelect }: { movement: Movement; onSelect: (m: Movement) => void }) {
   const chip = MOVEMENT_CHIP_STYLES[movement.type]
 
   return (
@@ -41,7 +42,11 @@ function MovementCard({ movement }: { movement: Movement }) {
         <div className={styles.netBadge}>
           <span className={`${styles.netValue} monetary`}>{formatValue(movement.netValue)}</span>
         </div>
-        <button className={styles.chevronBtn} aria-label={`Ver detalle de ${movement.type}`}>
+        <button
+          className={styles.chevronBtn}
+          aria-label={`Ver detalle de ${movement.type}`}
+          onClick={() => onSelect(movement)}
+        >
           <IconChevronRight size={12} />
         </button>
       </div>
@@ -51,8 +56,9 @@ function MovementCard({ movement }: { movement: Movement }) {
 
 const TOTAL_PAGES = 6
 
-export function MovimientosTab() {
+export function MovimientosTab({ onNavigateToMiInvested }: { onNavigateToMiInvested?: () => void } = {}) {
   const [currentPage, setCurrentPage] = useState(1)
+  const [selectedMovement, setSelectedMovement] = useState<Movement | null>(null)
 
   const pageNumbers: (number | '...')[] = [1, 2, '...', TOTAL_PAGES]
 
@@ -68,7 +74,7 @@ export function MovimientosTab() {
       <ul className={styles.list}>
         {movements.map((m) => (
           <li key={m.id}>
-            <MovementCard movement={m} />
+            <MovementCard movement={m} onSelect={setSelectedMovement} />
           </li>
         ))}
       </ul>
@@ -106,6 +112,13 @@ export function MovimientosTab() {
           <IconChevronRight size={12} />
         </button>
       </div>
+
+      <MovimientoDetalleDrawer
+        movement={selectedMovement}
+        isOpen={selectedMovement !== null}
+        onClose={() => setSelectedMovement(null)}
+        onNavigateToMiInvested={onNavigateToMiInvested}
+      />
     </div>
   )
 }

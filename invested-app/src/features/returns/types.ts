@@ -1,6 +1,6 @@
 export type RiskProfile = 'prudente' | 'observador' | 'arriesgado'
 
-export type ContractTab = 'desempeno' | 'objetivo' | 'movimientos' | 'detalles'
+export type ContractTab = 'desempeno' | 'objetivo' | 'crecer' | 'movimientos' | 'detalles'
 
 export type ReturnsSubTab = 'rendimientos' | 'composicion'
 

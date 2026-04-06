@@ -1,16 +1,21 @@
-import { IconEdit } from '../Icons'
+import { useState } from 'react'
+import { useInvestorLevel, mockInvestorInput } from '@/hooks/useInvestorLevel'
+import { MixExplorerDrawer } from '@/components/crecer/MixExplorerDrawer'
+import { IconRefresh } from '../Icons'
 import styles from './ObjetivoTab.module.css'
 
 const GOAL = {
-  userName: 'Juan Pablo',
-  name: 'Primera cuota casita 🏠',
-  category: 'Vivienda',
-  timeToAchieve: '5 años',
-  progressPercent: 35,
-  targetAmount: 2300000000,
+  name: 'Invertir en finca raíz 🏠',
+  currentAmount: 125450000,
+  targetAmount: 250000000,
+  progressPercent: 50,
+  startDate: '15 mar 2025',
+  estimatedDate: '15 mar 2030',
+  monthlyContribution: 2500000,
+  contributionDay: '05 de cada mes',
 }
 
-function formatCOPCompact(value: number): string {
+function formatCOP(value: number): string {
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
@@ -18,105 +23,143 @@ function formatCOPCompact(value: number): string {
   }).format(value)
 }
 
-function SamiIcon() {
-  return (
-    <div className={styles.samiIcon} aria-hidden="true">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="16" fill="#E8F8FF" />
-        <circle cx="16" cy="13" r="7" fill="#52FFD9" fillOpacity="0.4" />
-        <rect x="10" y="10" width="12" height="10" rx="4" fill="#0099DE" />
-        <circle cx="13" cy="14" r="1.5" fill="white" />
-        <circle cx="19" cy="14" r="1.5" fill="white" />
-        <path
-          d="M13 18.5C13 18.5 14.5 20 16 20C17.5 20 19 18.5 19 18.5"
-          stroke="white"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <rect x="14" y="6" width="4" height="3" rx="1" fill="#0099DE" />
-        <circle cx="13" cy="6" r="1.2" fill="#00C73D" />
-        <circle cx="19" cy="6" r="1.2" fill="#00C73D" />
-      </svg>
-      <span className={styles.sparkle}>✨</span>
-    </div>
-  )
-}
+export function ObjetivoTab({ onNavigateToCrecer }: { onNavigateToCrecer?: () => void } = {}) {
+  const { currentLevel, currentLevelLabel, currentLevelEmoji } = useInvestorLevel(mockInvestorInput)
+  const hasEvolved = currentLevel !== 'principiante'
+  const [bannerVisible, setBannerVisible] = useState(hasEvolved)
+  const [explorerOpen, setExplorerOpen] = useState(false)
 
-export function ObjetivoTab() {
   return (
     <div className={styles.container}>
-      {/* Header row */}
+      {/* ── Header: goal name + Editar objetivo button ── */}
       <div className={styles.headerRow}>
-        <SamiIcon />
-        <p className={styles.headline}>
-          <span className={styles.userName}>¡{GOAL.userName}</span>
-          <span className={styles.headlineText}>, este es el progreso hacia tu objetivo! 🚀</span>
-        </p>
-        <button className={styles.editGoalBtn}>
-          <span className={styles.editGoalBtnIcon}>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path
-                d="M10 2C10 2 8 0 6 2C4 4 2 10 2 10C2 10 8 8 10 6C12 4 10 2 10 2Z"
-                stroke="white"
-                strokeWidth="1.2"
-                strokeLinejoin="round"
-              />
-              <path d="M6 6L8 4" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-            </svg>
-          </span>
+        <h2 className={styles.pageTitle}>{GOAL.name}</h2>
+        <button className={styles.editGoalBtn} type="button">
+          <span className={styles.editGoalBtnIcon}><IconRefresh size={14} /></span>
           Editar objetivo
         </button>
       </div>
 
-      {/* Goal progress card */}
-      <div className={styles.goalCard}>
-        {/* Left: details */}
-        <div className={styles.goalDetails}>
-          <div className={styles.goalTitleRow}>
-            <h2 className={styles.goalName}>{GOAL.name}</h2>
-            <button className={styles.goalEditBtn} aria-label="Editar nombre del objetivo">
-              <IconEdit size={18} />
-            </button>
-          </div>
-
-          <div className={styles.progressGroup}>
-            <div className={styles.progressBar}>
-              <div
-                className={styles.progressFill}
-                style={{ width: `${GOAL.progressPercent}%` }}
-                role="progressbar"
-                aria-valuenow={GOAL.progressPercent}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              >
-                <span className={styles.progressLabel}>{GOAL.progressPercent} %</span>
-              </div>
-              <div className={styles.progressEmpty} />
+      {/* ── Card progreso de meta ── */}
+      <div className={styles.progressCard}>
+        <div className={styles.progressTopRow}>
+          <div className={styles.progressAmountBlock}>
+            <div className={styles.progressLabelRow}>
+              <p className={styles.progressLabel}>Progreso de tu meta</p>
+              {hasEvolved && !bannerVisible && (
+                <button
+                  className={styles.levelChip}
+                  onClick={() => setExplorerOpen(true)}
+                  type="button"
+                  data-tooltip="Ver mis mezclas disponibles"
+                  aria-label="Ver mis mezclas disponibles"
+                >
+                  Nivel {currentLevelLabel} {currentLevelEmoji}
+                </button>
+              )}
             </div>
+            <p className={`${styles.progressAmount} monetary`}>
+              {formatCOP(GOAL.currentAmount)}{' '}
+              <span className={styles.progressTarget}>/ {formatCOP(GOAL.targetAmount)}</span>
+            </p>
+          </div>
+          <span className={styles.progressPercent}>{GOAL.progressPercent}%</span>
+        </div>
 
-            <div className={styles.progressMeta}>
-              <span className={styles.metaItem}>
-                <strong>Categoría del objetivo: </strong>
-                {GOAL.category}
-              </span>
-              <span className={`${styles.metaItem} ${styles.metaRight}`}>
-                <strong>Tiempo para lograrlo: </strong>
-                {GOAL.timeToAchieve}
-              </span>
+        <div className={styles.progressTrack}>
+          <div
+            className={styles.progressFill}
+            style={{ width: `${GOAL.progressPercent}%` }}
+            role="progressbar"
+            aria-valuenow={GOAL.progressPercent}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          />
+        </div>
+
+        <div className={styles.progressDates}>
+          <span>Iniciaste: {GOAL.startDate}</span>
+          <span>Meta estimada: {GOAL.estimatedDate}</span>
+        </div>
+      </div>
+
+      {/* ── Banner nivel ── */}
+      {hasEvolved && bannerVisible && (
+        <div className={styles.banner}>
+          <button
+            className={styles.bannerClose}
+            onClick={() => setBannerVisible(false)}
+            type="button"
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
+          <div className={styles.bannerContent}>
+            <div className={styles.bannerLeft}>
+              <span className={styles.bannerEmoji} aria-hidden="true">{currentLevelEmoji}</span>
+              <div>
+                <p className={styles.bannerTitle}>¡Alcanzaste el nivel {currentLevelLabel}!</p>
+                <p className={styles.bannerText}>
+                  Tienes acceso a 2 mezclas nuevas que podrían acelerar tu meta
+                </p>
+              </div>
+            </div>
+            <div className={styles.bannerRight}>
+              <button
+                className={styles.bannerBtn}
+                type="button"
+                onClick={() => setExplorerOpen(true)}
+              >
+                Explorar mezclas →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Dos cards inferiores ── */}
+      <div className={styles.cardsGrid}>
+        {/* Detalles del plan */}
+        <div className={styles.card}>
+          <h3 className={styles.cardTitle}>Detalles del plan</h3>
+          <div className={styles.detailList}>
+            <div className={styles.detailRow}>
+              <span className={styles.detailLabel}>Aporte mensual</span>
+              <span className={`${styles.detailValue} monetary`}>{formatCOP(GOAL.monthlyContribution)}</span>
+            </div>
+            <div className={styles.detailRow}>
+              <span className={styles.detailLabel}>Frecuencia</span>
+              <span className={styles.detailValue}>Mensual</span>
+            </div>
+            <div className={styles.detailRow}>
+              <span className={styles.detailLabel}>Día de aporte</span>
+              <span className={styles.detailValue}>{GOAL.contributionDay}</span>
             </div>
           </div>
         </div>
 
-        {/* Right: target amount */}
-        <div className={styles.targetAmount}>
-          <p className={styles.targetLabel}>Monto objetivo:</p>
-          <div className={styles.targetBox}>
-            <span className={`${styles.targetValue} monetary`}>
-              {formatCOPCompact(GOAL.targetAmount)}
-            </span>
+        {/* Proyección estimada */}
+        <div className={styles.card}>
+          <h3 className={styles.cardTitle}>Proyección estimada</h3>
+          <p className={styles.projectionText}>
+            Vas por buen camino. Si mantienes tu ritmo actual de aportes y la rentabilidad
+            proyectada, alcanzarás tu meta 3 meses antes de lo previsto.
+          </p>
+          <div className={styles.tipBox}>
+            <p className={styles.tipLabel}>Tip de Invested</p>
+            <p className={styles.tipText}>
+              Aumentar tu aporte en un 5% anual compensaría la inflación y protegería tu
+              poder adquisitivo.
+            </p>
           </div>
         </div>
       </div>
+
+      <MixExplorerDrawer
+        isOpen={explorerOpen}
+        onClose={() => setExplorerOpen(false)}
+        onNavigateToCrecer={onNavigateToCrecer}
+      />
     </div>
   )
 }

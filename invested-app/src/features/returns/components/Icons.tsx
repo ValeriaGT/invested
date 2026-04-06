@@ -85,3 +85,7 @@ export function IconChevronRight({ size, className }: IconProps) {
 export function IconChevronLeft({ size, className }: IconProps) {
   return faIcon('fa-solid fa-chevron-left', size, className)
 }
+
+export function IconSeedling({ size, className }: IconProps) {
+  return faIcon('fa-solid fa-seedling', size, className)
+}
