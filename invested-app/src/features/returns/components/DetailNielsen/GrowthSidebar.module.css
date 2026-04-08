@@ -1,0 +1,309 @@
+/* ─── Base: todos los sub-componentes comparten el mismo contenedor ─── */
+.container {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ─── Tipografía compartida ─── */
+
+/* Etiqueta de sección — uppercase pequeño, solo orienta */
+.sectionLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+/* Texto de ayuda / meta — xs, secundario */
+.hint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* ─── Sección genérica ─── */
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MI NIVEL
+   ══════════════════════════════════════════════════════════════ */
+
+.nivelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Chips de mezclas — flex-wrap para que nunca desborden */
+.mixChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Grupo de barra de progreso */
+.progressGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-3);
+}
+
+.progressGroup:last-child {
+  margin-bottom: 0;
+}
+
+.progressLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.progressLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Contadores n/total — mono para alineación */
+.progressCount {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.progressTrack {
+  height: 6px;
+  background: var(--color-neutral-l03);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-brand);
+  border-radius: var(--radius-full);
+  transition: width 400ms ease;
+}
+
+.maxLevel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-align: center;
+  padding: var(--space-2) 0;
+}
+
+/* Nota informativa compacta */
+.infoNote {
+  padding: var(--space-3);
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MIS HITOS
+   ══════════════════════════════════════════════════════════════ */
+
+.hitosCounter {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.hitosCounter strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Fila de hito — una línea, sin tarjeta extra */
+.hitoRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-neutral-l03);
+}
+
+.hitoRow:last-child {
+  border-bottom: none;
+}
+
+/* Hito pendiente: más tenue, sin llamar la atención */
+.hitoRowPending {
+  opacity: 0.55;
+}
+
+.hitoEmoji {
+  font-size: var(--font-size-base);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.hitoBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.hitoTitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hitoDate {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-green-d02);
+}
+
+.hitoHint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Check de desbloqueado — verde, derecha */
+.hitoCheck {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-green-d02);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   APRENDE
+   ══════════════════════════════════════════════════════════════ */
+
+.moduleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Fila de módulo — reemplaza la tarjeta cuadrada del componente original */
+.moduleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.moduleRow:hover:not(:disabled) {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-brand);
+}
+
+.moduleRow:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Módulo bloqueado: no interactivo, tenue */
+.moduleRowLocked {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Módulo completado: fondo verde suave */
+.moduleRowCompleted {
+  background: var(--color-green-l04);
+  border-color: var(--color-green-l03);
+}
+
+.moduleRowCompleted:hover {
+  background: var(--color-green-l04);
+  border-color: var(--color-green-l03);
+  cursor: default;
+}
+
+/* Icono del módulo — cuadrado pequeño con emoji */
+.moduleIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-neutral-l03);
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.moduleIconLocked {
+  background: var(--color-neutral-l03);
+  opacity: 0.7;
+}
+
+.moduleIconDone {
+  background: var(--color-green-l03);
+}
+
+/* Info del módulo: título + estado */
+.moduleInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.moduleTitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moduleMeta {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+}
+
+.metaAvailable { color: var(--color-brand); }
+.metaDone      { color: var(--color-green-d02); }
+.metaLocked    { color: var(--color-text-secondary); }

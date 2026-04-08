@@ -6,9 +6,9 @@ export const contractData: ContractData = {
   fundName: 'Fondo Voluntario de Pensión Skandia Multifund',
   totalAmount: 1352732191,
   contributions: 1253054979,
-  returns: -99677212,
+  returns: 99677212,
   evolutionDate: '29 septiembre',
-  hasActionNeeded: true,
+  hasActionNeeded: false,
 }
 
 export const chartData: MonthlyChartEntry[] = [

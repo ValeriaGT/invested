@@ -60,7 +60,15 @@ const HITOS_APRENDIZAJE: { unlocked: Hito[]; pending: Hito[] } = {
   ],
 }
 
-function HitoCard({ hito, unlocked }: { hito: Hito; unlocked: boolean }) {
+function HitoCard({
+  hito,
+  unlocked,
+  onGoToObjetivo,
+}: {
+  hito: Hito
+  unlocked: boolean
+  onGoToObjetivo?: () => void
+}) {
   return (
     <Card
       padding="compact"
@@ -74,6 +82,11 @@ function HitoCard({ hito, unlocked }: { hito: Hito; unlocked: boolean }) {
           {hito.unlockedAt && (
             <p className={styles.hitoDate}>{hito.unlockedAt}</p>
           )}
+          {unlocked && onGoToObjetivo && (
+            <button className={styles.hitoCtaLink} type="button" onClick={onGoToObjetivo}>
+              Ve a Objetivo y edita tu mezcla →
+            </button>
+          )}
         </div>
       </div>
     </Card>
@@ -85,11 +98,13 @@ function HitosColumn({
   description,
   unlocked,
   pending,
+  onGoToObjetivo,
 }: {
   title: string
   description: string
   unlocked: Hito[]
   pending: Hito[]
+  onGoToObjetivo?: () => void
 }) {
   return (
     <div className={styles.column}>
@@ -100,7 +115,7 @@ function HitosColumn({
 
       <div className={styles.hitosList}>
         {unlocked.map((h) => (
-          <HitoCard key={h.title} hito={h} unlocked />
+          <HitoCard key={h.title} hito={h} unlocked onGoToObjetivo={onGoToObjetivo} />
         ))}
         {pending.map((h) => (
           <HitoCard key={h.title} hito={h} unlocked={false} />
@@ -110,7 +125,7 @@ function HitosColumn({
   )
 }
 
-export function MisHitos() {
+export function MisHitos({ onGoToObjetivo }: { onGoToObjetivo?: () => void }) {
   const totalUnlocked =
     HITOS_PERMANENCIA.unlocked.length + HITOS_APRENDIZAJE.unlocked.length
   const totalHitos =
@@ -131,12 +146,14 @@ export function MisHitos() {
           description="Por mantenerte invertido"
           unlocked={HITOS_PERMANENCIA.unlocked}
           pending={HITOS_PERMANENCIA.pending}
+          onGoToObjetivo={onGoToObjetivo}
         />
         <HitosColumn
           title="Aprendizaje"
           description="Por entender tu inversión"
           unlocked={HITOS_APRENDIZAJE.unlocked}
           pending={HITOS_APRENDIZAJE.pending}
+          onGoToObjetivo={onGoToObjetivo}
         />
       </div>
     </div>

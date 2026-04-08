@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
 import { ToastProvider } from '@ds/components/Toast'
+import { VersionSwitch } from '@/components/dev/VersionSwitch'
 import { Routes } from './routes'
 
 const queryClient = new QueryClient({
@@ -18,6 +19,7 @@ export function App() {
       <BrowserRouter>
         <ToastProvider>
           <Routes />
+          <VersionSwitch />
         </ToastProvider>
       </BrowserRouter>
     </QueryClientProvider>

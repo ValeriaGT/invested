@@ -109,3 +109,21 @@
   color: var(--color-text-secondary);
   margin: var(--space-1) 0 0;
 }
+
+.hitoCtaLink {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: var(--space-2);
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand);
+  text-align: left;
+  transition: color 120ms ease;
+}
+
+.hitoCtaLink:hover {
+  color: var(--color-brand-hover);
+}

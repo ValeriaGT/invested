@@ -4,7 +4,7 @@ import { Badge } from '@ds/components/Badge'
 import { MixDrawer } from '@/components/crecer/MixDrawer'
 import { formatCOP } from '@shared/utils/format'
 import type { ContractData } from '../../types'
-import { IconArrowTrendDown, IconTriangleExclamation } from '../Icons'
+import { IconArrowTrendUp } from '../Icons'
 import styles from './ContractSummaryCards.module.css'
 
 interface ContractSummaryCardsProps {
@@ -66,32 +66,35 @@ function EvolutionCard({
   onViewComposition?: () => void
 }) {
   const [mixDrawerOpen, setMixDrawerOpen] = useState(false)
-  const isNegativeReturn = data.returns < 0
+  const total = data.contributions + data.returns
 
   return (
     <div className={styles.evolutionCard}>
-      {data.hasActionNeeded && <span className={styles.actionBadge}>Acción necesaria</span>}
       <p className={styles.evolutionTitle}>Evolución del contrato al {data.evolutionDate}</p>
-      <div className={styles.metricGroup}>
-        <p className={styles.metricLabel}>Dinero que has aportado</p>
-        <p className={`${styles.metricValue} monetary`}>{formatCOP(data.contributions)}</p>
-      </div>
-      <div className={styles.metricGroup}>
-        <p className={styles.metricLabel}>Rendimientos</p>
-        <div className={styles.returnsRow}>
-          {isNegativeReturn && <IconTriangleExclamation size={16} />}
-          <p
-            className={`${styles.metricValue} ${isNegativeReturn ? styles.negative : ''} monetary`}
-          >
-            {formatCOP(data.returns)}
-          </p>
-          {isNegativeReturn && <IconArrowTrendDown size={16} />}
+
+      <div className={styles.evolutionMainRow}>
+        <div className={styles.evolutionTotalSection}>
+          <p className={styles.evolutionTotalLabel}>Total</p>
+          <div className={styles.evolutionTotalAmountRow}>
+            <p className={`${styles.evolutionTotalAmount} monetary`}>{formatCOP(total)}</p>
+            <div className={styles.trendIconWrapper}>
+              <IconArrowTrendUp size={12} />
+            </div>
+          </div>
         </div>
-        {isNegativeReturn && (
-          <a href="#" className={styles.actionLink}>
-            ¿Qué puedo hacer?
-          </a>
-        )}
+        <div className={styles.evolutionDonut} aria-hidden="true" />
+      </div>
+
+      <div className={styles.evolutionBreakdown}>
+        <div className={styles.evolutionBreakdownItem}>
+          <p className={styles.evolutionBreakdownLabel}>Capital</p>
+          <p className={`${styles.evolutionBreakdownValue} monetary`}>{formatCOP(data.contributions)}</p>
+        </div>
+        <div className={styles.evolutionBreakdownDivider} aria-hidden="true" />
+        <div className={styles.evolutionBreakdownItem}>
+          <p className={styles.evolutionBreakdownLabel}>Rendimientos</p>
+          <p className={`${styles.evolutionBreakdownValue} monetary`}>{formatCOP(data.returns)}</p>
+        </div>
       </div>
 
       {/* ── Sección mezcla ── */}

@@ -1,0 +1,527 @@
+/* ─── Page shell ─── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-6) var(--space-10);
+  max-width: 1301px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NIVEL 1 — Hero (above the fold)
+   Grid 2 columnas: identidad | dinero + acciones
+   ══════════════════════════════════════════════════════════════ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-stroke-grey-light);
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.heroTitle {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-top: var(--space-1);
+}
+
+.heroSubtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.heroFundName {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.heroRight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.heroAmountLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+/* EL número — único elemento 4xl en toda la pantalla */
+.heroAmountValue {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+
+.heroStatRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.heroStatLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Valor secundario: xl — jerárquicamente por debajo del saldo */
+.heroStatValue {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* Verde solo para comunicar positivo — no decorativo */
+.heroStatValuePos { color: var(--color-green-d02); }
+
+.heroStatDivider {
+  width: 1px;
+  height: 44px;
+  background: var(--color-stroke-grey-light);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Botones con aire — size Large da el padding correcto */
+.heroActions {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}
+
+/* ─── Botón de ayuda inline ─── */
+/* TODO: DS-token — icon-button variant ghost small */
+.helpBtn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  vertical-align: middle;
+  transition: color 120ms ease;
+}
+.helpBtn:hover { color: var(--color-brand); }
+.helpBtn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONTENIDO — flex row: columna main + sidebar persistente
+   ══════════════════════════════════════════════════════════════ */
+
+.contentArea {
+  display: flex;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+/* Columna principal: composición + acordeones */
+.contentMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Nivel 2: Composición */
+.compositionSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Nivel 3: acordeones */
+.level3 {
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ─── Sidebar derecho ─── */
+.sidebar {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ─── Labels de sección ─── */
+.sectionLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ─── Tarjeta lateral: objetivo + movimiento ─── */
+.sideCard {
+  background: #fff;
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.sideBlock {
+  padding: var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sideBlockHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.sideBlockDivider {
+  height: 1px;
+  background: var(--color-stroke-grey-light);
+}
+
+/* ─── Progreso al objetivo ─── */
+
+.objetivoRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Único número grande en el sidebar */
+.objetivoPct {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.objetivoName {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.progressTrack {
+  height: 6px;
+  background: var(--color-neutral-l03);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-brand);
+  border-radius: var(--radius-full);
+  transition: width 400ms ease;
+}
+
+.progressMeta {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* ─── Último movimiento ─── */
+
+.lastMovRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.lastMovInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.lastMovType {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.lastMovMeta {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.lastMovAmount {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.amountPos { color: var(--color-green-d02); }
+.amountNeg { color: var(--color-feedback-error-dark); }
+
+/* TODO: DS-token — text-link button inline */
+.contextLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-brand);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+}
+.contextLink:hover { color: var(--color-brand-hover); }
+.contextLink:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Tu crecimiento — tarjeta lateral integrada ─── */
+
+.growthCard {
+  background: #fff;
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.growthCardHead {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-stroke-grey-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.growthTitle {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* Pill de sub-tabs — más compacta para caber en el sidebar */
+.growthSubTabs {
+  display: flex;
+  gap: 2px;
+  background: var(--color-neutral-l03);
+  padding: 3px;
+  border-radius: 50px;
+}
+
+.growthSubTab {
+  flex: 1;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.growthSubTab:hover:not(.growthSubTabActive) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.growthSubTabActive {
+  background: var(--color-brand);
+  color: #fff;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Cuerpo del card de crecimiento — el componente interno gestiona su propio padding */
+.growthCardBody {
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Acordeones (nivel 3)
+   ══════════════════════════════════════════════════════════════ */
+
+/* TODO: DS — Accordion component needed */
+.accordionItem {
+  border-top: 1px solid var(--color-stroke-grey-light);
+}
+
+.accordionItem:first-child {
+  border-top: none;
+}
+
+.accordionTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease;
+}
+
+.accordionTrigger:hover {
+  background: var(--color-surface-subtle);
+}
+
+.accordionTrigger:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: -2px;
+}
+
+.accordionTitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.accordionIcon {
+  color: var(--color-text-secondary);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.accordionIconOpen {
+  transform: rotate(90deg);
+}
+
+.accordionContent {
+  padding: var(--space-2) var(--space-5) var(--space-5);
+  background: #fff;
+}
+
+/* Lista de movimientos en acordeón */
+.movList {
+  display: flex;
+  flex-direction: column;
+}
+
+.movRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-neutral-l03);
+}
+
+.movRow:last-child {
+  border-bottom: none;
+}
+
+/* TODO: DS-token — Chip/Tag component */
+.movChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.movInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.movLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.movDate {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.movAmount {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.chartWrap {
+  margin-bottom: var(--space-4);
+}
+
+/* ─── Modales ─── */
+.explainerText {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.explainerHighlight {
+  display: block;
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}

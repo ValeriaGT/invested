@@ -48,6 +48,10 @@ export function IconArrowLeft({ size, className }: IconProps) {
   return faIcon('fa-solid fa-arrow-left', size, className)
 }
 
+export function IconArrowTrendUp({ size, className }: IconProps) {
+  return faIcon('fa-solid fa-arrow-trend-up', size, className)
+}
+
 export function IconArrowTrendDown({ size, className }: IconProps) {
   return faIcon('fa-solid fa-arrow-trend-down', size, className)
 }
