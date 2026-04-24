@@ -116,7 +116,7 @@ function AnticipatoryRegretBanner() {
             <XAxis dataKey="mes" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#a5a5a5', fontFamily: 'var(--font-family-body)' }} />
             <YAxis hide domain={['dataMin - 1', 'dataMax + 1']} />
             <ReferenceLine y={100} stroke="#e9e9e9" strokeDasharray="3 3" />
-            <Tooltip formatter={(v: number) => [`${v.toFixed(1)}`, 'Base 100']} contentStyle={{ fontSize: 10, borderRadius: 6, border: '1px solid #e9e9e9' }} />
+            <Tooltip formatter={(v) => [`${Number(v).toFixed(1)}`, 'Base 100']} contentStyle={{ fontSize: 10, borderRadius: 6, border: '1px solid #e9e9e9' }} />
             <Area type="monotone" dataKey="valor" stroke="#00c73d" strokeWidth={2} fill="url(#recoveryGradientV3)" dot={false} />
           </AreaChart>
         </ResponsiveContainer>
