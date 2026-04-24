@@ -12,11 +12,6 @@ const VERSIONS: { id: DetailVersion; label: string }[] = [
   { id: 'nudges', label: 'V3' },
 ]
 
-function shouldRender(): boolean {
-  if (import.meta.env.DEV) return true
-  return new URLSearchParams(window.location.search).get('preview') === 'true'
-}
-
 export function readStoredVersion(): DetailVersion {
   const stored = localStorage.getItem(DETAIL_VERSION_KEY)
   if (stored === 'base' || stored === 'nielsen' || stored === 'nudges') return stored
@@ -40,8 +35,6 @@ export function useDetailVersion(): DetailVersion {
 
 export function VersionSwitch() {
   const [version, setVersion] = useState<DetailVersion>(readStoredVersion)
-
-  if (!shouldRender()) return null
 
   function select(v: DetailVersion) {
     setVersion(v)
