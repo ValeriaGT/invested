@@ -321,7 +321,7 @@ const MODULES: Module[] = [
   },
 ]
 
-export function AprendeSidebar() {
+export function AprendeSidebar({ onModuleComplete }: { onModuleComplete?: () => void } = {}) {
   const [openModuleId, setOpenModuleId] = useState<string | null>(null)
   const [completed, setCompleted] = useState<Set<string>>(new Set())
   const { show } = useToast()
@@ -333,6 +333,7 @@ export function AprendeSidebar() {
     setCompleted((prev) => new Set(prev).add(openModule.id))
     setOpenModuleId(null)
     show({ kind: 'success', title: '🎉 ¡Hito desbloqueado!', message: openModule.title })
+    onModuleComplete?.()
   }
 
   return (

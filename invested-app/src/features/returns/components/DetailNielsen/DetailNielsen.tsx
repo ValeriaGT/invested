@@ -12,7 +12,7 @@ import { DetallesTab } from '../DetallesTab/DetallesTab'
 import { ReturnsChart } from '../ReturnsChart/ReturnsChart'
 import { PortfolioTable } from '../PortfolioTable/PortfolioTable'
 import { NivelSidebar, HitosSidebar, AprendeSidebar } from './GrowthSidebar'
-import { IconChevronRight, IconCircleQuestion } from '../Icons'
+import { IconChevronRight, IconCircleQuestion, IconEdit } from '../Icons'
 import styles from './DetailNielsen.module.css'
 
 // ─── Configuración ────────────────────────────────────────────────────────────
@@ -165,6 +165,7 @@ const statusBadge = STATUS_BADGE[CONTRACT_STATUS]
 export function DetailNielsen() {
   const [explainer, setExplainer] = useState<ExplainerKey | null>(null)
   const [activeCrecerSubTab, setActiveCrecerSubTab] = useState<'miNivel' | 'misHitos' | 'aprende'>('miNivel')
+  const [showMixAlert, setShowMixAlert] = useState(false)
 
   const lastMovement = movements[0]
 
@@ -191,71 +192,150 @@ export function DetailNielsen() {
       {/*
         ══════════════════════════════════════════════════════════════════
         NIVEL 1 — Primer vistazo (above the fold)
-        Izquierda: identidad del contrato. Derecha: dinero + acciones.
+        Columna única, todo alineado al mismo eje izquierdo que el
+        contenido de abajo.
         ══════════════════════════════════════════════════════════════════
       */}
       <section className={styles.hero}>
 
-        <div className={styles.heroLeft}>
+        {/* Identidad del contrato */}
+        <div className={styles.heroMeta}>
           <Badge label={statusBadge.label} variant={statusBadge.variant} />
           <h1 className={styles.heroTitle}>{contractData.goalName}</h1>
-          <p className={styles.heroSubtitle}>Contrato # {contractData.contractNumber}</p>
-          <p className={styles.heroFundName}>{contractData.fundName}</p>
+          <p className={styles.heroSubtitle}>
+            Contrato # {contractData.contractNumber} · {contractData.fundName}
+          </p>
         </div>
 
-        <div className={styles.heroRight}>
-          <div>
-            <p className={styles.heroAmountLabel}>Saldo total en tu contrato</p>
-            <p className={`${styles.heroAmountValue} monetary`}>
-              {formatCOP(contractData.totalAmount)}
-            </p>
-          </div>
+        {/* Dos tarjetas lado a lado — misma distribución que contentArea */}
+        <div className={styles.heroCards}>
 
-          <div className={styles.heroStatRow}>
-            <div className={styles.heroStat}>
-              <span className={styles.heroStatLabel}>
-                Rendimiento del último año
-                <HelpButton
-                  onClick={() => setExplainer('rendimiento')}
-                  label="¿Qué es el rendimiento del último año?"
-                />
-              </span>
-              <span className={`${styles.heroStatValue} ${styles.heroStatValuePos}`}>
-                {ANNUAL_RETURN_LABEL}
-              </span>
+          {/* Tarjeta izquierda: saldo + métricas + botones (con borde) */}
+          <div className={styles.heroCardSaldo}>
+            <div className={styles.heroAmount}>
+              <p className={styles.heroAmountLabel}>Saldo total en tu contrato</p>
+              <p className={`${styles.heroAmountValue} monetary`}>
+                {formatCOP(contractData.totalAmount)}
+              </p>
             </div>
 
-            <div className={styles.heroStatDivider} aria-hidden="true" />
+            <div className={styles.heroStatRow}>
+              <div className={styles.heroStat}>
+                <span className={styles.heroStatLabel}>
+                  Rendimiento del último año
+                  <HelpButton
+                    onClick={() => setExplainer('rendimiento')}
+                    label="¿Qué es el rendimiento del último año?"
+                  />
+                </span>
+                <span className={`${styles.heroStatValue} ${styles.heroStatValuePos}`}>
+                  {ANNUAL_RETURN_LABEL}
+                </span>
+              </div>
 
-            <div className={styles.heroStat}>
-              <span className={styles.heroStatLabel}>
-                Tu mezcla
-                <HelpButton onClick={() => setExplainer('mezcla')} label="¿Qué es tu mezcla?" />
-              </span>
-              {/* Regla Nielsen 3: "Discreta" → "Discreta · Perfil conservador" */}
-              <Badge label="Discreta · Perfil conservador" variant="success" />
+              <div className={styles.heroStatDivider} aria-hidden="true" />
+
+              <div className={styles.heroStat}>
+                <span className={styles.heroStatLabel}>
+                  Tu mezcla
+                  <HelpButton onClick={() => setExplainer('mezcla')} label="¿Qué es tu mezcla?" />
+                </span>
+                <Badge label="Discreta · Perfil conservador" variant="success" />
+              </div>
+            </div>
+
+            <div className={styles.heroActions}>
+              <Button variant="Primary" size="Large" label="Aportar" />
+              <Button variant="Secondary" size="Large" label="Retirar" />
             </div>
           </div>
 
-          {/* Un solo CTA principal — Aportar lleno, Retirar ghost */}
-          <div className={styles.heroActions}>
-            <Button variant="Primary" size="Large" label="Aportar" />
-            <Button variant="Secondary" size="Large" label="Retirar" />
+          {/* Tarjeta derecha: objetivo (sin borde) */}
+          <div className={styles.heroCardGoal}>
+            <div className={styles.goalHeader}>
+              <p className={styles.sectionLabel}>Dale un objetivo a tu dinero</p>
+              <button
+                type="button"
+                className={styles.goalEditBtn}
+                aria-label="Editar nombre del objetivo"
+              >
+                <IconEdit size={14} />
+              </button>
+            </div>
+
+            <div className={styles.goalNameRow}>
+              <span className={styles.goalName}>{GOAL.name}</span>
+            </div>
+
+            <div className={styles.goalProgress}>
+              <div className={styles.goalPctRow}>
+                <span className={styles.goalPct}>{GOAL.progressPercent}%</span>
+                <span className={styles.goalPctHint}>del objetivo</span>
+              </div>
+              <div
+                className={styles.progressTrack}
+                role="progressbar"
+                aria-valuenow={GOAL.progressPercent}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              >
+                <div className={styles.progressFill} style={{ width: `${GOAL.progressPercent}%` }} />
+              </div>
+              <p className={styles.progressMeta}>{GOAL.progressPercent} de 100 puntos</p>
+            </div>
+
+            <button
+              type="button"
+              className={styles.contextLink}
+              onClick={() => setExplainer('progreso')}
+            >
+              ¿Qué significa el progreso? →
+            </button>
           </div>
         </div>
       </section>
 
       {/*
         ══════════════════════════════════════════════════════════════════
-        CONTENIDO — dos columnas: main + sidebar persistente
-        Main: composición (nivel 2) + historial/rentabilidad/detalles (nivel 3)
-        Sidebar: objetivo + movimiento + crecimiento (siempre visibles)
+        CONTENIDO — dos columnas alineadas con el hero
+        Main: composición (nivel 2) + acordeones (nivel 3)
+        Sidebar: objetivo + movimiento + crecimiento
         ══════════════════════════════════════════════════════════════════
       */}
       <div className={styles.contentArea}>
 
         {/* ── Columna principal ── */}
         <div className={styles.contentMain}>
+
+          {/* Alerta tras completar módulo de aprendizaje */}
+          {showMixAlert && (
+            <Alert
+              variant="success"
+              title="Nuevo hito de aprendizaje completado"
+              message={
+                <div className={styles.mixAlertBody}>
+                  <p>
+                    Completar módulos te acerca a desbloquear mezclas con mayor potencial
+                    de rendimiento. Revisa qué nuevas opciones tienes disponibles.
+                  </p>
+                  <div className={styles.mixAlertActions}>
+                    <Button
+                      variant="Primary"
+                      size="Small"
+                      label="Descubrir nuevas mezclas"
+                      onClick={() => {}}
+                    />
+                    <Button
+                      variant="Tertiary"
+                      size="Small"
+                      label="Ahora no"
+                      onClick={() => setShowMixAlert(false)}
+                    />
+                  </div>
+                </div>
+              }
+            />
+          )}
 
           {/* Nivel 2: Composición de la mezcla */}
           <div className={styles.compositionSection}>
@@ -292,36 +372,12 @@ export function DetailNielsen() {
         {/* ── Sidebar derecho: contexto + crecimiento ── */}
         <aside className={styles.sidebar} aria-label="Contexto y crecimiento">
 
-          {/* Objetivo + último movimiento */}
+          {/* Último movimiento */}
           <div className={styles.sideCard}>
             <div className={styles.sideBlock}>
               <div className={styles.sideBlockHead}>
-                <p className={styles.sectionLabel}>Progreso al objetivo</p>
-                <HelpButton
-                  onClick={() => setExplainer('progreso')}
-                  label="¿Qué significa el progreso al objetivo?"
-                />
+                <p className={styles.sectionLabel}>Último movimiento</p>
               </div>
-              <div className={styles.objetivoRow}>
-                <span className={styles.objetivoPct}>{GOAL.progressPercent}%</span>
-                <span className={styles.objetivoName}>{GOAL.name}</span>
-              </div>
-              <div
-                className={styles.progressTrack}
-                role="progressbar"
-                aria-valuenow={GOAL.progressPercent}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              >
-                <div className={styles.progressFill} style={{ width: `${GOAL.progressPercent}%` }} />
-              </div>
-              <p className={styles.progressMeta}>{GOAL.progressPercent} de 100 puntos</p>
-            </div>
-
-            <div className={styles.sideBlockDivider} aria-hidden="true" />
-
-            <div className={styles.sideBlock}>
-              <p className={styles.sectionLabel}>Último movimiento</p>
               <div className={styles.lastMovRow}>
                 <div className={styles.lastMovInfo}>
                   <span className={styles.lastMovType}>{MOVEMENT_LABELS[lastMovement.type]}</span>
@@ -352,12 +408,12 @@ export function DetailNielsen() {
           {/* Tu crecimiento — integrado en la columna lateral */}
           <div className={styles.growthCard}>
             <div className={styles.growthCardHead}>
-              <p className={styles.growthTitle}>🌱 Tu crecimiento</p>
+              <p className={styles.growthTitle}>Tu crecimiento</p>
               <div className={styles.growthSubTabs} role="tablist" aria-label="Sección Tu crecimiento">
                 {(
                   [
-                    { id: 'miNivel',  label: 'Nivel'  },
-                    { id: 'misHitos', label: 'Hitos' },
+                    { id: 'miNivel',  label: 'Nivel'   },
+                    { id: 'misHitos', label: 'Hitos'   },
                     { id: 'aprende',  label: 'Aprende' },
                   ] as const
                 ).map((t) => (
@@ -377,7 +433,9 @@ export function DetailNielsen() {
             <div className={styles.growthCardBody}>
               {activeCrecerSubTab === 'miNivel'  && <NivelSidebar />}
               {activeCrecerSubTab === 'misHitos' && <HitosSidebar />}
-              {activeCrecerSubTab === 'aprende'  && <AprendeSidebar />}
+              {activeCrecerSubTab === 'aprende'  && (
+                <AprendeSidebar onModuleComplete={() => setShowMixAlert(true)} />
+              )}
             </div>
           </div>
         </aside>

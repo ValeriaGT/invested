@@ -2,30 +2,30 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  padding: var(--space-4) var(--space-6) var(--space-10);
+  gap: var(--space-8);                           /* 32px — entre secciones principales */
+  padding: var(--space-4) var(--space-6) var(--space-12); /* 16 24 48 */
   max-width: 1301px;
   margin: 0 auto;
 }
 
 /* ══════════════════════════════════════════════════════════════
    NIVEL 1 — Hero (above the fold)
-   Grid 2 columnas: identidad | dinero + acciones
+   Columna única — mismo eje vertical que el contenido de abajo.
    ══════════════════════════════════════════════════════════════ */
 
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-10);
-  padding-bottom: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);                           /* 24px entre bloques del hero */
+  padding-bottom: var(--space-8);                /* 32px antes de la línea */
   border-bottom: 1px solid var(--color-stroke-grey-light);
 }
 
-.heroLeft {
+/* Identidad: badge + título + subtítulo */
+.heroMeta {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  justify-content: center;
+  gap: var(--space-2);                           /* 8px entre elementos de texto */
 }
 
 .heroTitle {
@@ -34,7 +34,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   line-height: 1.2;
-  margin-top: var(--space-1);
+  margin-top: var(--space-2);                    /* 8px separa badge de título */
 }
 
 .heroSubtitle {
@@ -43,23 +43,49 @@
   color: var(--color-text-secondary);
 }
 
-.heroFundName {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+/* Dos tarjetas lado a lado — misma distribución que contentArea */
+.heroCards {
+  display: flex;
+  gap: var(--space-6);                           /* 24px entre tarjetas */
+  align-items: flex-start;
 }
 
-.heroRight {
+/* Tarjeta izquierda: saldo (con borde) — flex:1 = mismo ancho que contentMain */
+.heroCardSaldo {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-6);                           /* 24px entre bloques internos */
+  padding: var(--space-6);                       /* 24px uniforme */
+  background: #fff;
+  border: 1px solid var(--color-stroke-grey-light);
+  border-radius: var(--radius-md);
+}
+
+/* Tarjeta derecha: objetivo (sin borde) — 340px = mismo ancho que sidebar */
+.heroCardGoal {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);                           /* 16px entre elementos internos */
+  padding: var(--space-6);                       /* 24px uniforme */
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+}
+
+/* Número principal: label arriba, valor abajo */
+.heroAmount {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);                           /* 8px label → número */
 }
 
 .heroAmountLabel {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-1);
 }
 
 /* EL número — único elemento 4xl en toda la pantalla */
@@ -71,51 +97,124 @@
   line-height: 1.1;
 }
 
+/* Fila de métricas secundarias: labels alineados arriba */
 .heroStatRow {
   display: flex;
-  align-items: center;
-  gap: var(--space-5);
+  align-items: flex-start;                       /* labels se alinean por arriba */
+  gap: var(--space-6);                           /* 24px entre stat | divider | stat */
 }
 
 .heroStat {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);                           /* 8px label → valor */
 }
 
+/* Etiqueta de métrica: xs, siempre arriba */
 .heroStatLabel {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-2);                           /* 8px entre texto y ? */
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
 }
 
-/* Valor secundario: xl — jerárquicamente por debajo del saldo */
+/* Valor secundario: xl — mismo tamaño para positivo y negativo */
 .heroStatValue {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
+  line-height: 1.3;
 }
 
-/* Verde solo para comunicar positivo — no decorativo */
+/* Solo cambia color, nunca tamaño ni layout */
 .heroStatValuePos { color: var(--color-green-d02); }
+.heroStatValueNeg { color: var(--color-feedback-error-dark); }
 
+/* Divider vertical se estira para igualar la altura de ambos stats */
 .heroStatDivider {
   width: 1px;
-  height: 44px;
+  align-self: stretch;
   background: var(--color-stroke-grey-light);
   flex-shrink: 0;
-  align-self: center;
 }
 
-/* Botones con aire — size Large da el padding correcto */
+/* Botones con aire generoso */
 .heroActions {
   display: flex;
-  gap: var(--space-3);
-  padding-top: var(--space-2);
+  gap: var(--space-4);                           /* 16px entre botones */
+}
+
+/* ─── Tarjeta objetivo (hero derecha) ─── */
+
+.goalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);                           /* 8px label ↔ edit btn */
+}
+
+.goalEditBtn {
+  background: none;
+  border: none;
+  padding: var(--space-2);                       /* 8px — área de toque cómoda */
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  transition: color 120ms ease, background 120ms ease;
+}
+.goalEditBtn:hover {
+  color: var(--color-brand);
+  background: rgba(0, 0, 0, 0.04);
+}
+.goalEditBtn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.goalNameRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);                           /* 8px */
+}
+
+.goalName {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.goalProgress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);                           /* 8px entre elementos */
+}
+
+.goalPctRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);                           /* 8px */
+}
+
+.goalPct {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.goalPctHint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 /* ─── Botón de ayuda inline ─── */
@@ -123,7 +222,7 @@
 .helpBtn {
   background: none;
   border: none;
-  padding: 2px;
+  padding: 0;
   cursor: pointer;
   color: var(--color-text-secondary);
   display: inline-flex;
@@ -140,12 +239,13 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   CONTENIDO — flex row: columna main + sidebar persistente
+   CONTENIDO — flex row: columna main + sidebar
+   Mismas columnas que el hero (todo arranca del mismo eje izquierdo)
    ══════════════════════════════════════════════════════════════ */
 
 .contentArea {
   display: flex;
-  gap: var(--space-6);
+  gap: var(--space-6);                           /* 24px main ↔ sidebar */
   align-items: flex-start;
 }
 
@@ -155,14 +255,14 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-6);                           /* 24px entre secciones internas */
 }
 
 /* Nivel 2: Composición */
 .compositionSection {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);                           /* 16px label → componente */
 }
 
 /* Nivel 3: acordeones */
@@ -178,10 +278,10 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-6);                           /* 24px entre cards del sidebar */
 }
 
-/* ─── Labels de sección ─── */
+/* ─── Labels de sección — patrón único, siempre uppercase xs ─── */
 .sectionLabel {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
@@ -199,49 +299,22 @@
   overflow: hidden;
 }
 
+/* Padding uniforme 24px en todos los bloques de sidebar */
 .sideBlock {
-  padding: var(--space-4) var(--space-4);
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);                           /* 16px entre elementos internos */
 }
 
 .sideBlockHead {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-}
-
-.sideBlockDivider {
-  height: 1px;
-  background: var(--color-stroke-grey-light);
-}
-
-/* ─── Progreso al objetivo ─── */
-
-.objetivoRow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-
-/* Único número grande en el sidebar */
-.objetivoPct {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-}
-
-.objetivoName {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  gap: var(--space-2);                           /* 8px label ↔ help btn */
 }
 
 .progressTrack {
-  height: 6px;
+  height: 8px;                                   /* 8px — múltiplo base */
   background: var(--color-neutral-l03);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -266,13 +339,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-2);
+  gap: var(--space-4);                           /* 16px info ↔ amount */
 }
 
 .lastMovInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);                           /* 8px tipo ↔ fecha */
   min-width: 0;
 }
 
@@ -289,6 +362,7 @@
   color: var(--color-text-secondary);
 }
 
+/* Monto: mismo tamaño para positivo y negativo — solo cambia color */
 .lastMovAmount {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-base);
@@ -328,12 +402,13 @@
   overflow: hidden;
 }
 
+/* Padding uniforme 24px — igual que sideBlock */
 .growthCardHead {
-  padding: var(--space-4);
+  padding: var(--space-6);
   border-bottom: 1px solid var(--color-stroke-grey-light);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);                           /* 16px título ↔ tabs */
 }
 
 .growthTitle {
@@ -343,13 +418,12 @@
   color: var(--color-text-primary);
 }
 
-/* Pill de sub-tabs — más compacta para caber en el sidebar */
+/* Pill de sub-tabs */
 .growthSubTabs {
   display: flex;
-  gap: 2px;
   background: var(--color-neutral-l03);
-  padding: 3px;
-  border-radius: 50px;
+  padding: var(--space-2);                       /* 8px inset del track */
+  border-radius: 9999px;
 }
 
 .growthSubTab {
@@ -360,8 +434,8 @@
   color: var(--color-text-secondary);
   background: none;
   border: none;
-  padding: 5px 8px;
-  border-radius: 50px;
+  padding: var(--space-2);                       /* 8px uniforme */
+  border-radius: 9999px;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.15s, color 0.15s;
@@ -378,9 +452,23 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* Cuerpo del card de crecimiento — el componente interno gestiona su propio padding */
+/* Cuerpo: el componente interno gestiona su propio padding */
 .growthCardBody {
   overflow: hidden;
+}
+
+/* ─── Alerta de nuevas mezclas tras completar módulo ─── */
+
+.mixAlertBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);                           /* 16px texto ↔ botones */
+}
+
+.mixAlertActions {
+  display: flex;
+  gap: var(--space-4);                           /* 16px entre botones */
+  align-items: center;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -401,8 +489,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-5);
+  gap: var(--space-4);                           /* 16px título ↔ icono */
+  padding: var(--space-4) var(--space-6);        /* 16 / 24 */
   background: #fff;
   border: none;
   cursor: pointer;
@@ -437,11 +525,12 @@
 }
 
 .accordionContent {
-  padding: var(--space-2) var(--space-5) var(--space-5);
+  padding: var(--space-2) var(--space-6) var(--space-6); /* 8 24 24 — alineado con trigger */
   background: #fff;
 }
 
-/* Lista de movimientos en acordeón */
+/* ─── Lista de movimientos en acordeón ─── */
+
 .movList {
   display: flex;
   flex-direction: column;
@@ -450,8 +539,8 @@
 .movRow {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) 0;
+  gap: var(--space-4);                           /* 16px chip ↔ info ↔ amount */
+  padding: var(--space-4) 0;                     /* 16px entre filas */
   border-bottom: 1px solid var(--color-neutral-l03);
 }
 
@@ -463,7 +552,7 @@
 .movChip {
   display: inline-flex;
   align-items: center;
-  padding: 2px var(--space-2);
+  padding: var(--space-2);                       /* 8px uniforme */
   border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
@@ -476,7 +565,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);                           /* 8px label ↔ date */
 }
 
 .movLabel {
@@ -494,6 +583,7 @@
   color: var(--color-text-secondary);
 }
 
+/* Monto: mismo tamaño positivo/negativo — solo color cambia */
 .movAmount {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
@@ -503,7 +593,7 @@
 }
 
 .chartWrap {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-4);                 /* 16px */
 }
 
 /* ─── Modales ─── */
@@ -516,8 +606,8 @@
 
 .explainerHighlight {
   display: block;
-  margin-top: var(--space-3);
-  padding: var(--space-3);
+  margin-top: var(--space-4);                    /* 16px */
+  padding: var(--space-4);                       /* 16px uniforme */
   background: var(--color-surface-subtle);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);

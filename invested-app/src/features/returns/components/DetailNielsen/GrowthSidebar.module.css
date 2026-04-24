@@ -1,14 +1,14 @@
-/* ─── Base: todos los sub-componentes comparten el mismo contenedor ─── */
+/* ─── Base: padding uniforme 24px (= sideBlock del padre) ─── */
 .container {
-  padding: var(--space-4);
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-4);                           /* 16px entre bloques internos */
 }
 
 /* ─── Tipografía compartida ─── */
 
-/* Etiqueta de sección — uppercase pequeño, solo orienta */
+/* Etiqueta de sección — mismo patrón que DetailNielsen.sectionLabel */
 .sectionLabel {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
@@ -16,7 +16,7 @@
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-2);                 /* 8px label → contenido */
 }
 
 /* Texto de ayuda / meta — xs, secundario */
@@ -40,7 +40,7 @@
 .nivelRow {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-2);                           /* 8px badge ↔ hint */
   flex-wrap: wrap;
 }
 
@@ -48,15 +48,15 @@
 .mixChips {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-2);                           /* 8px entre chips */
 }
 
 /* Grupo de barra de progreso */
 .progressGroup {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: var(--space-3);
+  gap: var(--space-2);                           /* 8px label ↔ track ↔ hint */
+  margin-bottom: var(--space-4);                 /* 16px entre grupos */
 }
 
 .progressGroup:last-child {
@@ -67,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-2);
+  gap: var(--space-2);                           /* 8px */
 }
 
 .progressLabel {
@@ -87,7 +87,7 @@
 }
 
 .progressTrack {
-  height: 6px;
+  height: 8px;                                   /* 8px — múltiplo base */
   background: var(--color-neutral-l03);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -100,18 +100,18 @@
   transition: width 400ms ease;
 }
 
+/* Alineado a la izquierda — sin text-align: center en ningún lugar */
 .maxLevel {
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  text-align: center;
   padding: var(--space-2) 0;
 }
 
 /* Nota informativa compacta */
 .infoNote {
-  padding: var(--space-3);
+  padding: var(--space-4);                       /* 16px uniforme */
   background: var(--color-surface-subtle);
   border-radius: var(--radius-md);
   font-family: var(--font-family-body);
@@ -140,8 +140,8 @@
 .hitoRow {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) 0;
+  gap: var(--space-2);                           /* 8px emoji ↔ body ↔ check */
+  padding: var(--space-2) 0;                     /* 8px entre filas */
   border-bottom: 1px solid var(--color-neutral-l03);
 }
 
@@ -156,7 +156,7 @@
 
 .hitoEmoji {
   font-size: var(--font-size-base);
-  width: 22px;
+  width: 24px;                                   /* 24px = 3×8 */
   text-align: center;
   flex-shrink: 0;
   line-height: 1;
@@ -167,9 +167,9 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1px;
 }
 
+/* Título y fecha/hint comparten eje vertical, line-height da el espacio */
 .hitoTitle {
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
@@ -178,12 +178,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1.5;
 }
 
 .hitoDate {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
   color: var(--color-green-d02);
+  line-height: 1.5;
 }
 
 .hitoHint {
@@ -193,6 +195,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1.5;
 }
 
 /* Check de desbloqueado — verde, derecha */
@@ -211,15 +214,15 @@
 .moduleList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-2);                           /* 8px entre módulos */
 }
 
-/* Fila de módulo — reemplaza la tarjeta cuadrada del componente original */
+/* Fila de módulo — padding uniforme 16px */
 .moduleRow {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3);
+  gap: var(--space-4);                           /* 16px icono ↔ info */
+  padding: var(--space-4);                       /* 16px uniforme */
   width: 100%;
   background: #fff;
   border: 1px solid var(--color-stroke-grey-light);
@@ -257,16 +260,16 @@
   cursor: default;
 }
 
-/* Icono del módulo — cuadrado pequeño con emoji */
+/* Icono del módulo — cuadrado 32×32 (4×8) */
 .moduleIcon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--color-neutral-l03);
   border-radius: var(--radius-sm);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -280,13 +283,13 @@
   background: var(--color-green-l03);
 }
 
-/* Info del módulo: título + estado */
+/* Info del módulo: título + estado — line-height da el espacio */
 .moduleInfo {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);                           /* 8px título ↔ meta */
 }
 
 .moduleTitle {
@@ -299,6 +302,7 @@
   white-space: nowrap;
 }
 
+/* Estado del módulo: mismo tamaño para todos los estados — solo cambia color */
 .moduleMeta {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
